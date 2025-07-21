@@ -4,7 +4,7 @@ const PasswordScreen = ({ onAccess }) => {
     const [input, setInput] = useState('');
 
     const handleSubmit = () => {
-        if (input === process.env.APP_PASSWORD) onAccess(); // Cambia '1234' por tu contraseña deseada
+        if (input === process.env.REACT_APP_PASSWORD) onAccess(); // Cambia '1234' por tu contraseña deseada
         else alert('Contraseña incorrecta');
     };
 
