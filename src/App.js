@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
 import PasswordScreen from './components/PasswordScreen';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
 
@@ -9,10 +8,12 @@ const config = {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['\\[', '\\]']],
     },
+    options: {
+        renderActions: {
+            addMenu: []
+        }
+    }
 };
-
-// const assistantId = 'asst_zN8M6tpqIHWFI2SyhCgcqlzg';
-// const apiKey = process.env.REACT_APP_OPENAI_KEY;
 
 const App = () => {
     const [hasAccess, setHasAccess] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
         if (!input.trim()) return;
         setLoading(true);
         setOutput('');
+        setIsCompleted(false);
 
         try {
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -42,11 +44,9 @@ const App = () => {
                             role: 'system',
                             content: `
                                 Resuelve ecuaciones diferenciales ordinarias usando el método de series infinitas cuando sea aplicable. Presenta el desarrollo como lo haría un profesor universitario en una pizarra: con pasos en secuencia vertical, sin explicaciones, sin comentarios, sin conectores ni texto entre líneas.
-
                                 No uses encabezados ni subtítulos, excepto cuando sea estrictamente necesario, como:
                                 - "Primeros términos"
                                 - "Solución en serie"
-
                                 Comienza por la ecuación original. Luego muestra:
                                 1. La suposición en serie centrada en 0.
                                 2. Las derivadas de y', y''.
@@ -58,7 +58,6 @@ const App = () => {
                                 8. Los primeros coeficientes (a₂, a₃...).
                                 9. La serie parcial.
                                 10. La solución final factorizada en función de a₀ como C₁ si aplica.
-
                                 No uses frases como “supongamos”, “entonces”, “reindexamos”, “finalmente”, ni explicaciones. Si la ecuación no puede resolverse por series, usa el método más adecuado, pero sigue el mismo estilo vertical sin texto.
                             `.trim(),
                         },
@@ -68,13 +67,11 @@ const App = () => {
                         },
                     ],
                 })
-
             });
 
             const reader = response.body.getReader();
             const decoder = new TextDecoder('utf-8');
             let buffer = '';
-
             let receivedText = false;
 
             while (true) {
@@ -107,10 +104,6 @@ const App = () => {
             console.error(err);
             setOutput('Error al conectar con la API.');
         }
-
-        setIsCompleted(true);
-        setLoading(false);
-        setDisplayText(''); // limpia animación
     };
 
     const handleReset = () => {
@@ -124,10 +117,7 @@ const App = () => {
         if (loading && output === '') {
             setDisplayText('Resolviendo');
             const dotsInterval = setInterval(() => {
-                setDisplayText(prev => {
-                    if (prev.endsWith("...")) return "Resolviendo";
-                    else return prev + ".";
-                });
+                setDisplayText(prev => (prev.endsWith("...") ? "Resolviendo" : prev + "."));
             }, 500);
             return () => clearInterval(dotsInterval);
         }
