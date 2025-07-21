@@ -145,7 +145,7 @@ const App = () => {
                 <div style={{ marginTop: 20 }}>
                     <strong>Resultado:</strong>
                     <MathJax hideUntilTypeset="first">
-                        <div>{output || displayText}</div>
+                        <div>{`\\[${(output || displayText).trim()}\\]`}</div>
                     </MathJax>
                 </div>
             </div>
