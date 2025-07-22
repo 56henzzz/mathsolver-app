@@ -206,7 +206,6 @@ const App = () => {
                         minHeight: '100px',
                         color: '#2d2d2d',
                         fontSize: '1rem',
-                        whiteSpace: 'pre-wrap'
                     }}>
                         <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Resultado:</strong>
                         <MathJax inline dynamic>
