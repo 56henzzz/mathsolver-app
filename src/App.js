@@ -135,26 +135,84 @@ const App = () => {
 
     return (
         <MathJaxContext version={3} config={config}>
-            <div style={{ padding: 30, maxWidth: 600, margin: 'auto' }}>
-                <h1>Resolución de Problemas Matemáticos</h1>
-                <textarea
-                    rows={5}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Escribe aquí el problema..."
-                    style={{ width: '100%', marginBottom: 10 }}
-                />
-                <button
-                    onClick={isCompleted ? handleReset : handleSend}
-                    disabled={loading}
-                >
-                    {isCompleted ? 'Nuevo problema' : 'Enviar'}
-                </button>
-                <div style={{ marginTop: 20 }}>
-                    <strong>Resultado:</strong>
-                    <MathJax inline dynamic>
-                        <div key={output}>{output || displayText}</div>
-                    </MathJax>
+            <div style={{
+                backgroundColor: '#f1f4f9',
+                minHeight: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontFamily: 'Segoe UI, sans-serif',
+                padding: '1rem'
+            }}>
+                <div style={{
+                    backgroundColor: '#ffffff',
+                    padding: '2rem',
+                    borderRadius: '16px',
+                    boxShadow: '0 6px 18px rgba(0,0,0,0.1)',
+                    width: '100%',
+                    maxWidth: '720px'
+                }}>
+                    <h1 style={{
+                        textAlign: 'center',
+                        marginBottom: '1.5rem',
+                        fontSize: '1.8rem',
+                        color: '#2c3e50'
+                    }}>
+                        Resolución de Problemas Matemáticos
+                    </h1>
+
+                    <textarea
+                        rows={5}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Escribe aquí el problema..."
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            fontSize: '1rem',
+                            borderRadius: '10px',
+                            border: '1px solid #ccc',
+                            resize: 'none',
+                            boxSizing: 'border-box',
+                            marginBottom: '1rem',
+                            fontFamily: 'inherit'
+                        }}
+                    />
+
+                    <button
+                        onClick={isCompleted ? handleReset : handleSend}
+                        disabled={loading}
+                        style={{
+                            width: '100%',
+                            padding: '0.8rem',
+                            fontSize: '1rem',
+                            backgroundColor: loading ? '#ccc' : '#4a90e2',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '10px',
+                            cursor: loading ? 'not-allowed' : 'pointer',
+                            transition: 'background 0.3s ease'
+                        }}
+                    >
+                        {isCompleted ? 'Nuevo problema' : 'Enviar'}
+                    </button>
+
+                    <div style={{
+                        marginTop: '2rem',
+                        backgroundColor: '#f9fafb',
+                        padding: '1rem',
+                        borderRadius: '12px',
+                        border: '1px solid #eee',
+                        minHeight: '100px',
+                        color: '#2d2d2d',
+                        fontSize: '1rem',
+                        whiteSpace: 'pre-wrap'
+                    }}>
+                        <strong style={{ display: 'block', marginBottom: '0.5rem' }}>Resultado:</strong>
+                        <MathJax inline dynamic>
+                            <div key={output}>{output || displayText}</div>
+                        </MathJax>
+                    </div>
                 </div>
             </div>
         </MathJaxContext>

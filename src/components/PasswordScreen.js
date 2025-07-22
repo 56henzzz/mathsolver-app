@@ -11,51 +11,63 @@ const PasswordScreen = ({ onAccess }) => {
     return (
         <div style={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center',
+            justifyContent: 'center',
             height: '100vh',
-            backgroundColor: '#f4f6f8',
-            fontFamily: 'Arial, sans-serif'
+            backgroundColor: '#eef2f7',
+            fontFamily: 'Segoe UI, Roboto, sans-serif'
         }}>
             <div style={{
-                backgroundColor: '#fff',
-                padding: '2rem',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                backgroundColor: '#ffffff',
+                padding: '2.5rem 2rem',
+                borderRadius: '16px',
+                boxShadow: '0 10px 24px rgba(0,0,0,0.08)',
                 width: '90%',
-                maxWidth: '320px',
-                textAlign: 'center'
+                maxWidth: '360px',
+                textAlign: 'center',
+                border: '1px solid #dde3ea'
             }}>
-                <h2 style={{ marginBottom: '1rem', fontSize: '1.5rem', color: '#333' }}>
-                    Acceso Seguro 🔒
+                <h2 style={{
+                    fontSize: '1.6rem',
+                    marginBottom: '1.5rem',
+                    color: '#2c3e50',
+                    fontWeight: '500'
+                }}>
+                    🔐 Acceso Privado
                 </h2>
                 <input
                     type="password"
-                    placeholder="Contraseña"
+                    placeholder="Ingresa tu contraseña"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     style={{
                         width: '100%',
-                        padding: '0.75rem',
-                        marginBottom: '1rem',
-                        borderRadius: '8px',
-                        border: '1px solid #ccc',
-                        fontSize: '1rem'
+                        padding: '0.85rem',
+                        fontSize: '1rem',
+                        borderRadius: '10px',
+                        border: '1px solid #ccd3dc',
+                        marginBottom: '1.25rem',
+                        outline: 'none',
+                        transition: 'border 0.3s',
+                        boxSizing: 'border-box'
                     }}
                 />
                 <button
                     onClick={handleSubmit}
                     style={{
                         width: '100%',
-                        padding: '0.75rem',
-                        backgroundColor: '#4a90e2',
+                        padding: '0.85rem',
+                        backgroundColor: '#2f80ed',
                         color: '#fff',
                         border: 'none',
-                        borderRadius: '8px',
+                        borderRadius: '10px',
                         fontSize: '1rem',
-                        cursor: 'pointer'
+                        fontWeight: '500',
+                        cursor: 'pointer',
+                        transition: 'background 0.3s ease'
                     }}
+                    onMouseOver={e => e.currentTarget.style.backgroundColor = '#1366d6'}
+                    onMouseOut={e => e.currentTarget.style.backgroundColor = '#2f80ed'}
                 >
                     Acceder
                 </button>
